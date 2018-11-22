@@ -15,7 +15,6 @@ public class GerantServiceImpl implements IGerantService{
 
 	@Override
 	public Gerant isExist(Gerant gIn) {
-		
 		return gDao.isEsist(gIn);
 	}
 

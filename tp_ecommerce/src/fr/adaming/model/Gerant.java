@@ -95,4 +95,14 @@ public class Gerant {
 		this.mdp = mdp;
 	}
 
+	public List<Categorie> getCategorie() {
+		return categorie;
+	}
+
+	public void setCategorie(List<Categorie> categorie) {
+		this.categorie = categorie;
+	}
+	
+	
+
 }

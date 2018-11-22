@@ -20,7 +20,7 @@ public class Categorie {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_ca")
 	private int id;
-	private String nomCategorie;
+	private String nom;
 	private byte[] photo;
 	private String description;
 	
@@ -37,18 +37,18 @@ public class Categorie {
 	}
 
 	// constructeur sans id
-	public Categorie(String nomCategorie, byte[] photo, String description) {
+	public Categorie(String nom, byte[] photo, String description) {
 		super();
-		this.nomCategorie = nomCategorie;
+		this.nom = nom;
 		this.photo = photo;
 		this.description = description;
 	}
 
 	// constructeur avec id
-	public Categorie(int id, String nomCategorie, byte[] photo, String description) {
+	public Categorie(int id, String nome, byte[] photo, String description) {
 		super();
 		this.id = id;
-		this.nomCategorie = nomCategorie;
+		this.nom = nom;
 		this.photo = photo;
 		this.description = description;
 	}
@@ -62,12 +62,12 @@ public class Categorie {
 		this.id = id;
 	}
 
-	public String getNomCategorie() {
-		return nomCategorie;
+	public String getNom() {
+		return nom;
 	}
 
-	public void setNomCategorie(String nomCategorie) {
-		this.nomCategorie = nomCategorie;
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 
 	public String getDescription() {
@@ -93,6 +93,16 @@ public class Categorie {
 	public void setProduit(List<Produit> produit) {
 		this.produit = produit;
 	}
+
+	public List<Gerant> getGerant() {
+		return gerant;
+	}
+
+	public void setGerant(List<Gerant> gerant) {
+		this.gerant = gerant;
+	}
+	
+	
 	
 	
 	
