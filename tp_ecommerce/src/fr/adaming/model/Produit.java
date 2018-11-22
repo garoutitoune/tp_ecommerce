@@ -23,7 +23,7 @@ public class Produit {
 	private double prix;
 	private int quantite;
 	private boolean selectionne;
-	private String photo;
+	private byte[] photo;
 	
 	//transformation de l'association
 	@ManyToOne
@@ -35,9 +35,11 @@ public class Produit {
 		super();
 	}
 	
+	
+
 	//constructeur sans id
-	public Produit(String designation, String description, double prix, int quantite, boolean selectionne,
-			String photo) {
+	public Produit(String designation, String description, double prix, int quantite, boolean selectionne, byte[] photo,
+			Categorie categorie) {
 		super();
 		this.designation = designation;
 		this.description = description;
@@ -45,11 +47,16 @@ public class Produit {
 		this.quantite = quantite;
 		this.selectionne = selectionne;
 		this.photo = photo;
+		this.categorie = categorie;
 	}
 	
+	
+
+
+
 	// constructeur avec id
 	public Produit(int id, String designation, String description, double prix, int quantite, boolean selectionne,
-			String photo) {
+			byte[] photo, Categorie categorie) {
 		super();
 		this.id = id;
 		this.designation = designation;
@@ -58,6 +65,7 @@ public class Produit {
 		this.quantite = quantite;
 		this.selectionne = selectionne;
 		this.photo = photo;
+		this.categorie = categorie;
 	}
 	
 	
@@ -98,12 +106,19 @@ public class Produit {
 	public void setSelectionne(boolean selectionne) {
 		this.selectionne = selectionne;
 	}
-	public String getPhoto() {
+	
+
+	public byte[] getPhoto() {
 		return photo;
 	}
-	public void setPhoto(String photo) {
+
+
+
+	public void setPhoto(byte[] photo) {
 		this.photo = photo;
 	}
+
+
 
 	public Categorie getCategorie() {
 		return categorie;
