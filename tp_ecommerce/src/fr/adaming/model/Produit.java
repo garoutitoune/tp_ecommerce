@@ -12,6 +12,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="produits")
@@ -29,6 +30,8 @@ public class Produit {
 	private boolean selectionne;
 	@Lob
 	private byte[] photo;
+	@Transient
+	private String image;
 	
 	//transformation de l'association
 	@ManyToOne
@@ -146,6 +149,18 @@ public class Produit {
 
 	public void setCategorie(Categorie categorie) {
 		this.categorie = categorie;
+	}
+
+
+
+	public String getImage() {
+		return image;
+	}
+
+
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 	
 	

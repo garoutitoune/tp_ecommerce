@@ -15,4 +15,6 @@ public interface ICategorieService {
 	public Categorie addCategorie(Categorie ca, Gerant g);
 	
 	public int modifierCategorie(Categorie ca);
+	
+	public int supprimerCategorie(Categorie ca);
 }

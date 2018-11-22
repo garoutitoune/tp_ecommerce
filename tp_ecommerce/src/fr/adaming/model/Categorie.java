@@ -7,9 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "categories")
@@ -21,8 +23,12 @@ public class Categorie {
 	@Column(name = "id_ca")
 	private int id;
 	private String nom;
+	@Lob
 	private byte[] photo;
 	private String description;
+	
+	@Transient
+	private String image;
 	
 	//transformation de l'association
 	@OneToMany(mappedBy="categorie")
@@ -45,7 +51,7 @@ public class Categorie {
 	}
 
 	// constructeur avec id
-	public Categorie(int id, String nome, byte[] photo, String description) {
+	public Categorie(int id, String nom, byte[] photo, String description) {
 		super();
 		this.id = id;
 		this.nom = nom;
@@ -100,6 +106,14 @@ public class Categorie {
 
 	public void setGerant(List<Gerant> gerant) {
 		this.gerant = gerant;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 	
 	
