@@ -14,7 +14,7 @@ import javax.persistence.Table;
 public class Commande {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY) 
 	@Column(name="id_co")
 	private int id;
 	private Date date;
