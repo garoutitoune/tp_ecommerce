@@ -6,34 +6,26 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
-	<title>Ma facelet login</title>
+	<title>Mon commerce</title>
 
 </h:head>
 <h:body>
+login client:
 	<h:form>
 
 		<h:panelGrid columns="2">
 			Login : 
-			<h:inputText value="#{gMB.gerant.mail}" />
+			<h:inputText value="#{clMB.cl.email}" />
 
 			MDP : 
-			<h:inputText value="#{gMB.gerant.mdp}" />
+			<h:inputSecret value="#{clMB.cl.mdp}" />
 
-			<h:commandButton value="Se connecter" action="#{gMB.seConnecter}" />
+			<h:commandButton value="Se connecter" action="#{clMB.seConnecter}" />
 		</h:panelGrid>
 	</h:form>
 
 	<h1 style="text-align: center; color: red">
 		<h:messages />
 	</h1>
-	
-	<h:link outcome="logincl" >je suis client</h:link>
-	<br/>
-	<h:link outcome="ajoutercl" >ajout client</h:link>
-	<br/>
-	<h:link outcome="delCl" >suppression client</h:link>
-	
-	
-	
 </h:body>
 </html>
