@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="commandes")
+@Table(name="commandes") 
 public class Commande {
 
 	@Id

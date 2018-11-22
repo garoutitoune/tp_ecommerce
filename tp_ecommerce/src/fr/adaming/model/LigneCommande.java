@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class LigneCommande {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY) 
 	@Column(name="id_li")
 	private int id;
 	private int qt;
