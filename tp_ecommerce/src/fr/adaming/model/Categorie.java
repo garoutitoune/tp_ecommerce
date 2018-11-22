@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -26,6 +27,9 @@ public class Categorie {
 	//transformation de l'association
 	@OneToMany(mappedBy="categorie")
 	private List<Produit> produit;
+	
+	@ManyToMany(mappedBy="categorie")
+	private List<Gerant> gerant;
 
 	// constructeur vide
 	public Categorie() {
