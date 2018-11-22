@@ -10,7 +10,7 @@
 		<!-- Enumerer les classes persistantes -->
 		<class>fr.adaming.model.Categorie</class>
 		<class>fr.adaming.model.Gerant</class>
-		<class>fr.adaming.model.Produit</class>
+		<class>fr.adaming.model.Produit</class> 
 		
 		<!-- Les props de hibernate -->
 		<properties>

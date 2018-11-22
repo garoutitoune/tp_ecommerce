@@ -1,12 +1,16 @@
 package fr.adaming.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -23,12 +27,16 @@ public class Produit {
 	private double prix;
 	private int quantite;
 	private boolean selectionne;
+	@Lob
 	private byte[] photo;
 	
 	//transformation de l'association
 	@ManyToOne
 	@JoinColumn(name="ca_id", referencedColumnName="id_ca")
 	private Categorie categorie;
+	@OneToMany(mappedBy="produit")
+	private List<LigneCommande> listeLignes;
+	
 	
 	// constructeur avec id
 	public Produit() {
@@ -107,6 +115,18 @@ public class Produit {
 		this.selectionne = selectionne;
 	}
 	
+
+	public List<LigneCommande> getListeLignes() {
+		return listeLignes;
+	}
+
+
+
+	public void setListeLignes(List<LigneCommande> listeLignes) {
+		this.listeLignes = listeLignes;
+	}
+
+
 
 	public byte[] getPhoto() {
 		return photo;

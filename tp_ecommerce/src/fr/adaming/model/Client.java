@@ -1,10 +1,13 @@
 package fr.adaming.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -19,6 +22,11 @@ public class Client {
 	private String adresse;
 	private String email;
 	private String tel;
+	//asso uml java
+	@OneToMany(mappedBy="client")
+	private List<Commande> listeCommande;
+	
+	//construc
 	public Client() {
 		super();
 	}
@@ -75,6 +83,14 @@ public class Client {
 	@Override
 	public String toString() {
 		return "Client [id=" + id + ", nom=" + nom + ", adresse=" + adresse + ", email=" + email + ", tel=" + tel + "]";
+	}
+
+	public List<Commande> getListeCommande() {
+		return listeCommande;
+	}
+
+	public void setListeCommande(List<Commande> listeCommande) {
+		this.listeCommande = listeCommande;
 	}
 	
 	

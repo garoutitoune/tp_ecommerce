@@ -1,12 +1,16 @@
 package fr.adaming.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,6 +22,17 @@ public class Commande {
 	@Column(name="id_co")
 	private int id;
 	private Date date;
+	
+	//asso uml java
+	@OneToMany(mappedBy="commande")
+	private List<LigneCommande> listeLignes;
+	@ManyToOne
+	@JoinColumn(name="cl_id", referencedColumnName="id_cl")
+	private Client client;
+	
+	//constructeurs
+	
+	
 	public Commande(int id, Date date) {
 		super();
 		this.id = id;
@@ -45,6 +60,18 @@ public class Commande {
 	@Override
 	public String toString() {
 		return "Commande [id=" + id + ", date=" + date + "]";
+	}
+	public List<LigneCommande> getListeLignes() {
+		return listeLignes;
+	}
+	public void setListeLignes(List<LigneCommande> listeLignes) {
+		this.listeLignes = listeLignes;
+	}
+	public Client getClient() {
+		return client;
+	}
+	public void setClient(Client client) {
+		this.client = client;
 	}
 	
 	
