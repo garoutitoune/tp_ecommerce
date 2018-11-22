@@ -34,8 +34,13 @@ public class ClientDaoImpl implements IClientDao{
 
 	@Override
 	public Client modifClient(Client cl) {
-		cl=this.searchById(cl);
-		return em.merge(cl);
+		Client clout=this.searchById(cl);
+		clout.setNom(cl.getNom());
+		clout.setAdresse(cl.getAdresse());
+		clout.setEmail(cl.getEmail());
+		clout.setMdp(cl.getMdp());
+		clout.setTel(cl.getTel());
+		return em.merge(clout);
 	}
 
 	@Override

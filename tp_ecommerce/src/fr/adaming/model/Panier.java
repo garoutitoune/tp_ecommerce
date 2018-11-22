@@ -1,5 +1,6 @@
 package fr.adaming.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -7,7 +8,7 @@ public class Panier {
 
 	
 	//asso uml java
-	private List<LigneCommande> listeLignes;
+	private List<LigneCommande> listeLignes=new ArrayList<>();
 
 	public List<LigneCommande> getListeLignes() {
 		return listeLignes;

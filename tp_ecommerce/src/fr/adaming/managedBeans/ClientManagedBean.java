@@ -14,6 +14,7 @@ import fr.adaming.model.Client;
 import fr.adaming.service.IClientService;
 
 @ManagedBean(name="clMB")
+@RequestScoped
 public class ClientManagedBean implements Serializable{
 
 	//asso uml java
@@ -34,7 +35,7 @@ public class ClientManagedBean implements Serializable{
 	@PostConstruct
 	public void init() {
 		// recuperer la session en cours
-		maSession = (HttpSession) FacesContext.getCurrentInstance().getCurrentInstance().getExternalContext()
+		maSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext()
 				.getSession(false);
 
 		// recuperer le client de la session
@@ -93,7 +94,10 @@ public class ClientManagedBean implements Serializable{
 	
 	public String modifClient(){
 		try {
-			this.cl=clService.modifClient((Client) maSession.getAttribute("clSession"));
+			Client clin=(Client) maSession.getAttribute("clSession");
+			System.out.println(clin);
+			this.cl=clService.modifClient(clin);
+			System.out.println(this.cl);
 			return "monCommerce.xhtml";
 			
 		} catch (Exception e) {
