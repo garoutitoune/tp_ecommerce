@@ -19,7 +19,7 @@
 		<ui:define name="monCorp">
 			
 			<h1>Liste des produits pour une catégorie</h1>
-			<h:form>
+			<h:form id="idProdsForm">
 			
 			<p:dataTable var="p" value="#{proMB.listeProds}" id="idProds">
 
@@ -39,6 +39,9 @@
 								<h:outputText value="#{p.quantite}" />
 							</p:column>
 							
+							<p:column headerText="Operations">
+								<p:commandButton icon="ui-icon-circle-plus" action="paMB.addProd(p)"></p:commandButton>
+							</p:column>
 							
 						</p:dataTable>
 			
