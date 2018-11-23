@@ -20,10 +20,10 @@
 <h:form enctype="multipart/form-data">
 
 <h:panelGrid columns="2">
-Id: <h:outputText value="#{caMB.categorie.id}" />
+Id: <h:inputText value="#{caMB.categorie.id}" />
 description: <h:inputText value="#{caMB.categorie.description}" />
 Nom: <h:inputText value="#{caMB.categorie.nom}" />
-photo: <p:fileUpload value="#{proMB.file}" mode="simple" skinSimple="true"/>
+photo: <p:fileUpload value="#{caMB.file}" mode="simple" skinSimple="true"/>
 
 
 						

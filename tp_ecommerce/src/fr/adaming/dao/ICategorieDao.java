@@ -17,5 +17,7 @@ public interface ICategorieDao {
 	public int modifierCategorie(Categorie ca);
 	
 	public int supprimerCategorie(Categorie ca);
+	
+	public int modifierCategoriePhoto(Categorie ca);
 
 }

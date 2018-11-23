@@ -47,4 +47,14 @@ public class CategorieServiceImpl implements ICategorieService{
 		return caDao.supprimerCategorie(ca);
 	}
 
+	@Override
+	public int modifierCategoriePhoto(Categorie ca) {
+		if(ca.getPhoto()!=null) {
+			return caDao.modifierCategoriePhoto(ca);
+		}else {
+			return caDao.supprimerCategorie(ca);
+		}
+		
+	}
+
 }

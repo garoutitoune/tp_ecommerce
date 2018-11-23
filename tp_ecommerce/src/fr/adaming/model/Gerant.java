@@ -27,7 +27,7 @@ public class Gerant {
 	private String mdp;
 	
 	//transformation de l'association UML en java
-	@ManyToMany(cascade=CascadeType.ALL)
+	@ManyToMany
 	@JoinTable(name="ger_cat", joinColumns=@JoinColumn(name="g_id"),inverseJoinColumns=@JoinColumn(name="ca_id"))
 	private List<Categorie> categorie;
 
