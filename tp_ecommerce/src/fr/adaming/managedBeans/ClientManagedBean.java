@@ -24,6 +24,7 @@ public class ClientManagedBean implements Serializable{
 	//attributs
 	private HttpSession maSession;
 	private Client cl;
+	private boolean connecte=false;
 
 	
 	//construc
@@ -53,6 +54,14 @@ public class ClientManagedBean implements Serializable{
 		this.cl = cl;
 	}
 	
+	public boolean isConnecte() {
+		return connecte;
+	}
+
+	public void setConnecte(boolean connecte) {
+		this.connecte = connecte;
+	}
+
 	public String seConnecter() {
 		
 		

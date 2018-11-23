@@ -15,11 +15,54 @@
 <h:body>
 	<ui:composition>
 		<h:form>
-			<p:breadCrumb>
-				<p:menuitem value="accueil client" url="monCommerce.xhtml" />
-				<p:menuitem value="Modifier" url="modifCl.xhtml" />
-				<p:menuitem value="se deconnecter" action="#{gMB.seDeconnecter}" />
-			</p:breadCrumb>
+			
+			<p:menubar>
+        <p:submenu label="Accueil" icon="ui-icon-home">
+        	<p:menuitem value="Notre entreprise" url="monCommerce.xhtml" />
+            <p:menuitem value="Nos magasins" url="#" />
+        </p:submenu>
+        
+        <p:submenu label="Parcourir les catégories" icon="ui-icon-circle-zoomout">
+        	<p:submenu label="Alimentaire">
+        		<p:menuitem value="Produits Frais" url="#" />
+        		<p:menuitem value="Autre" url="#" />
+        	</p:submenu>
+        	<p:menuitem value="Animalerie" url="#" />
+        	<p:menuitem value="Autre" url="#" />
+        	<p:separator/>
+        	<p:menuitem value="Voir toutes les catégories" url="#" />
+        </p:submenu>
+        
+        <p:submenu label="Aide" icon="ui-icon-help">
+        	<p:menuitem value="Modes de livraison" url="#" />
+        	<p:menuitem value="Contact" url="#" />
+        </p:submenu>
+        
+        
+        
+        <p:submenu label="Espace Client" icon="ui-icon-person">
+        	<p:menuitem value="Se Connecter/S'inscrire" url="logincl.xhtml" rendered="#{!clMB.connecte}"/>
+        	<p:menuitem value="Déconnexion" rendered="#{clMB.connecte}" action="#{gMB.seDeconnecter}" />
+        	<p:separator rendered="#{clMB.connecte}"/>
+        	<p:menuitem value="Modifier mes informations" url="modifCl.xhtml" rendered="#{clMB.connecte}"/>
+        	<p:menuitem value="Mes commandes" url="#" rendered="#{clMB.connecte}"/>
+        	<p:menuitem value="Mes avantages" url="#" rendered="#{clMB.connecte}"/>
+        	
+        	
+        	
+        </p:submenu>
+        <p:menuitem value="Panier" url="#" icon="ui-icon-cart"/>
+        
+        	<f:facet name="options">
+            	<p:inputText style="margin:1px 10px 1px 1px;" placeholder="Search"/>
+            </f:facet>
+        </p:menubar>
+        
+        
+			
+			
+			
+			
 		</h:form>
 	</ui:composition>
 </h:body>
