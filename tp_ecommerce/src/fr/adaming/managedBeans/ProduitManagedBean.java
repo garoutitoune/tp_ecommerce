@@ -110,7 +110,7 @@ public class ProduitManagedBean implements Serializable {
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("l'ajout a échoué"));
 
-			return "accueil";
+			return "supprimerPro";
 		}
 	}
 	
@@ -123,12 +123,12 @@ public class ProduitManagedBean implements Serializable {
 
 			// mettre a jour la liste dans la session
 			maSession.setAttribute("listeProSession", liste);
-			return "modifierPro";
+			return "accueil";
 
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("l'ajout a échoué"));
 
-			return "accueil";
+			return "modifierPro";
 		}
 	}
 }

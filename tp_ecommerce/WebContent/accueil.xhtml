@@ -13,49 +13,88 @@
 <h:body>
 	<ui:composition template="/templates/layout.xhtml">
 		<ui:define name="monCorp">
+			<p:growl id="message" showDetail="true" />
+			<div>
+				<p:fieldset legend="Categorie">
+					<h:form>
 
-			<h:form>
-				<p:dataTable var="cat" value="#{sessionScope.listeCaSession}">
+						<p:dataTable var="cat" value="#{sessionScope.listeCaSession}"
+							id="tableau">
 
-					<f:facet name="header">
-						<p:outputPanel>
-							<h:outputText
-								value="Liste des categories (#{sessionScope.listeCaSession.size()})" />
+							<f:facet name="header">
+								<p:outputPanel>
+									<h:outputText
+										value="Liste des categories (#{sessionScope.listeCaSession.size()})" />
 
-						</p:outputPanel>
+								</p:outputPanel>
 
-					</f:facet>
-
-
-					<p:column headerText="Id" filterBy="#{cat.id}" sortBy="#{cat.id}">
-						<h:outputText value="#{cat.id}" />
-					</p:column>
-
-					<p:column headerText="Nom" filterBy="#{cat.nom}"
-						sortBy="#{cat.nom}">
-						<h:outputText value="#{cat.nom}" />
-					</p:column>
-
-					<p:column headerText="Photo">
-						<h:graphicImage value="#{cat.image}" />
-					</p:column>
-
-					<p:column headerText="Description" filterBy="#{cat.description}"
-						sortBy="#{cat.description}">
-						<h:outputText value="#{cat.description}" />
-					</p:column>
+							</f:facet>
 
 
-					<p:column headerText="Operations" >
-						<h:commandLink action="#{caMB.supprimerCategorie}" title="Supprimer">
-							<h:graphicImage url="/resources/images/sup.png" />
-							<f:setPropertyActionListener value="#{cat}"
-								target="#{caMB.categorie}" />
-						</h:commandLink>
-					</p:column>
-				</p:dataTable>
-			</h:form>
+							<p:column headerText="Id" filterBy="#{cat.id}" sortBy="#{cat.id}">
+								<h:outputText value="#{cat.id}" />
+							</p:column>
+
+							<p:column headerText="Nom" filterBy="#{cat.nom}"
+								sortBy="#{cat.nom}">
+								<h:outputText value="#{cat.nom}" />
+							</p:column>
+
+							<p:column headerText="Photo">
+								<h:graphicImage value="#{cat.image}" />
+							</p:column>
+
+							<p:column headerText="Description" filterBy="#{cat.description}"
+								sortBy="#{cat.description}">
+								<h:outputText value="#{cat.description}" />
+							</p:column>
+
+
+							<p:column headerText="Operations">
+
+								<p:commandButton action="#{caMB.supprimerCategorie}"
+									value="supprimer" update="tableau" ajax="false">
+									<p:confirm header="Confirmation" message="Are you sure?" icon="pi pi-exclamation-triangle"/>
+									<f:setPropertyActionListener value="#{cat}"
+										target="#{caMB.categorie}" />
+								</p:commandButton>
+							</p:column>
+						</p:dataTable>
+					</h:form>
+				</p:fieldset>
+
+				<h:form>
+					<h:link outcome="ajouterPro">
+						<h:graphicImage value="/resources/images/add.png"
+							title="ajouterPro" />
+					</h:link>
+
+
+					<h:link outcome="modifierPro">
+						<h:graphicImage value="/resources/images/add.png"
+							title="modifierPro" />
+					</h:link>
+
+					<h:link outcome="supprimerPro">
+						<h:graphicImage value="/resources/images/add.png"
+							title="supprimerPro" />
+					</h:link>
+				</h:form>
+				<h:form>
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+						<p:commandButton value="Yes" type="button"
+							styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+						<p:commandButton value="No" type="button"
+							styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+					</p:confirmDialog>
+				</h:form>
+
+
+			</div>
+
 		</ui:define>
+
+
 	</ui:composition>
 
 </h:body>

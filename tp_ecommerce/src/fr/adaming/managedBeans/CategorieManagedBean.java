@@ -112,9 +112,11 @@ public class CategorieManagedBean implements Serializable {
 
 			// mettre a jour la liste dans la session
 			maSession.setAttribute("listeCaSession", liste);
-			return "supprimer";
+			
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("success de la suppression"));
+			return "accueil";
 		}else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("l'ajout a échoué"));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la suppression a échoué"));
 			
 			return "accueil";
 		}
