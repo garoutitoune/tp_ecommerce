@@ -51,6 +51,22 @@ public class PanierDaoImpl implements IPanierDao{
 		return panier;
 	}
 
+	@Override
+	public Panier delProd2(Panier panier, Produit produit) {
+		//on suppose que le produit est dans le panier et qt>1
+		List<LigneCommande> liste=panier.getListeLignes();
+		
+		LigneCommande li=new LigneCommande();
+		
+		for (int i = 0; i < liste.size(); i++) {
+			li=liste.get(i);
+			if(li.getProduit().getId()==produit.getId()) {
+				liste.remove(i);//si le produit est trouvé dans le panier, supprimer sa ligne de commande
+			}
+		}
+		return panier;		
+	}
+
 	
 	
 	

@@ -22,4 +22,9 @@ public class PanierServiceImpl implements IPanierService{
 		return pdao.delProd(panier, produit);
 	}
 
+	@Override
+	public Panier delProd2(Panier panier, Produit produit) {
+		return pdao.delProd2(panier, produit);
+	}
+
 }
