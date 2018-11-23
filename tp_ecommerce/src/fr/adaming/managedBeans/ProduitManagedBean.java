@@ -116,6 +116,7 @@ public class ProduitManagedBean implements Serializable {
 	
 	
 	public String modifierProduit() {
+		this.produit.setPhoto(file.getContents());
 		int verif=proService.modifierProduit(produit, categorie);
 		if(verif!=0){
 			// si tout c'est bien passé recupère la liste et je l'injecte
@@ -126,9 +127,26 @@ public class ProduitManagedBean implements Serializable {
 			return "accueil";
 
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("l'ajout a échoué"));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la modification a échoué"));
 
 			return "modifierPro";
+		}
+	}
+	
+	public String modifierLienProduit() {
+		return "modifierPro";
+	}
+	
+	public String rechercherByDesignation() {
+		List<Produit> listeOut=proService.getProduitByDes(produit, categorie);
+		if(listeOut!=null) {
+			maSession.setAttribute("listeProRechSession", listeOut);
+			
+			return "recherchePro";
+			
+		}else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("la recherche a échoué"));
+			return "recherchePro";
 		}
 	}
 }

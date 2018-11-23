@@ -90,4 +90,26 @@ public class ProduitDaoImpl implements IProduitDao {
 		return proOut;
 	}
 
+	@Override
+	public List<Produit> getProduitByDescr(Produit pro) {
+		// ecrire la requete en SQL
+		String req="SELECT * FROM produits WHERE ca_id=:pId AND designation LIKE :pDesign";
+		
+		//recuperer query pour envoyer la requete
+		Query query=em.createNativeQuery(req, Produit.class);
+		
+		//Passage avec params
+		query.setParameter("pId", pro.getCategorie().getId() );
+		query.setParameter("pDesign", "%"+pro.getDesignation()+"%" );
+			
+		List<Produit> liste=query.getResultList();
+		
+		for (Produit pr:liste) {
+			pr.setImage("data:image/png);base64," + Base64.encodeBase64String(pr.getPhoto()));
+		}
+		return liste;
+	}
+	
+	
+
 }

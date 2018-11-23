@@ -21,5 +21,7 @@ public interface IProduitDao {
 	public List<Produit> getAllProduitCat(Produit pro);
 	
 	public Produit getProduitById(Produit pro);
+	
+	public List<Produit> getProduitByDescr(Produit pro);
 
 }

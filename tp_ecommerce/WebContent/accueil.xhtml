@@ -10,11 +10,11 @@
 	<title>Accueil</title>
 
 </h:head>
-<h:body>
+<h:body >
 	<ui:composition template="/templates/layout.xhtml">
 		<ui:define name="monCorp">
 			<p:growl id="message" showDetail="true" />
-			<div>
+			<div >
 				<p:fieldset legend="Categorie">
 					<h:form>
 
@@ -52,12 +52,84 @@
 
 							<p:column headerText="Operations">
 
-								<p:commandButton action="#{caMB.supprimerCategorie}"
-									value="supprimer" update="tableau" ajax="false">
-									<p:confirm header="Confirmation" message="Are you sure?" icon="pi pi-exclamation-triangle"/>
+								<p:commandLink action="#{caMB.supprimerCategorie}"
+									 update="tableau" ajax="false">
+								<h:graphicImage value="/resources/images/supprimer.png"
+							title="Supprimer" />
 									<f:setPropertyActionListener value="#{cat}"
 										target="#{caMB.categorie}" />
-								</p:commandButton>
+								</p:commandLink>
+								<p:commandLink title="modifier" action="#{proMB.modifierLienCategorie}" update="tableau"
+									ajax="false">
+									<h:graphicImage value="/resources/images/editer.png" />
+									<f:setPropertyActionListener value="#{cat}"
+										target="#{caMB.categorie}" />
+								</p:commandLink>
+							</p:column>
+						</p:dataTable>
+					</h:form>
+				</p:fieldset>
+			</div>
+
+			<div >
+				<p:fieldset legend="Categorie">
+					<h:form>
+
+						<p:dataTable var="pro" value="#{sessionScope.listeProSession}"
+							id="tableau">
+
+							<f:facet name="header">
+								<p:outputPanel>
+									<h:outputText
+										value="Liste de(s) produit(s) (#{sessionScope.listeProSession.size()})" />
+
+								</p:outputPanel>
+
+							</f:facet>
+
+
+							<p:column headerText="Id" filterBy="#{pro.id}" sortBy="#{pro.id}">
+								<h:outputText value="#{pro.id}" />
+							</p:column>
+
+							<p:column headerText="Designation" filterBy="#{pro.designation}"
+								sortBy="#{pro.designation}">
+								<h:outputText value="#{pro.designation}" />
+							</p:column>
+
+							<p:column headerText="Photo">
+								<h:graphicImage value="#{pro.image}" />
+							</p:column>
+
+							<p:column headerText="Description" filterBy="#{pro.description}"
+								sortBy="#{pro.description}">
+								<h:outputText value="#{pro.description}" />
+							</p:column>
+
+							<p:column headerText="Prix" filterBy="#{pro.prix}"
+								sortBy="#{pro.prix}">
+								<h:outputText value="#{pro.prix}" />
+							</p:column>
+							<p:column headerText="Quantite" filterBy="#{pro.quantite}"
+								sortBy="#{pro.quantite}">
+								<h:outputText value="#{pro.quantite}" />
+							</p:column>
+							<p:column headerText="Operations">
+
+								<p:commandLink action="#{proMB.supprimerProduit}"
+									update="tableau" ajax="false">
+									<h:graphicImage value="/resources/images/supprimer.png" />
+
+									<f:setPropertyActionListener value="#{pro}"
+										target="#{proMB.produit}" />
+								</p:commandLink>
+
+								<p:commandLink title="modifier" action="#{caMB.modifierLienProduit}" update="tableau"
+									ajax="false">
+									<h:graphicImage value="/resources/images/editer.png" />
+									<f:setPropertyActionListener value="#{pro}"
+										target="#{proMB.produit}" />
+								</p:commandLink>
 							</p:column>
 						</p:dataTable>
 					</h:form>
@@ -68,27 +140,7 @@
 						<h:graphicImage value="/resources/images/add.png"
 							title="ajouterPro" />
 					</h:link>
-
-
-					<h:link outcome="modifierPro">
-						<h:graphicImage value="/resources/images/add.png"
-							title="modifierPro" />
-					</h:link>
-
-					<h:link outcome="supprimerPro">
-						<h:graphicImage value="/resources/images/add.png"
-							title="supprimerPro" />
-					</h:link>
 				</h:form>
-				<h:form>
-					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-						<p:commandButton value="Yes" type="button"
-							styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
-						<p:commandButton value="No" type="button"
-							styleClass="ui-confirmdialog-no" icon="pi pi-times" />
-					</p:confirmDialog>
-				</h:form>
-
 
 			</div>
 

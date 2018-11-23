@@ -7,7 +7,7 @@
 	 xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<title>modif produit</title>
+	<title>modif categorie</title>
 
 </h:head>
 <h:body>
@@ -20,17 +20,15 @@
 <h:form enctype="multipart/form-data">
 
 <h:panelGrid columns="2">
-Id: <h:outputText value="#{proMB.produit.id}" />
-description: <h:inputText value="#{proMB.produit.description}" />
-designiation: <h:inputText value="#{proMB.produit.designation}" />
-prix: <h:inputText value="#{proMB.produit.prix}" />
-quantité: <h:inputText value="#{proMB.produit.quantite}" />
+Id: <h:outputText value="#{caMB.categorie.id}" />
+description: <h:inputText value="#{caMB.categorie.description}" />
+Nom: <h:inputText value="#{caMB.categorie.nom}" />
 photo: <p:fileUpload value="#{proMB.file}" mode="simple" skinSimple="true"/>
-Categorie ID : <h:inputText value="#{proMB.categorie.id}"/>
+
 
 						
 
-<h:commandButton value="Modifier" action="#{proMB.modifierProduit}"/> 
+<h:commandButton value="Modifier" action="#{caMB.modifierCategorie}"/> 
 
 </h:panelGrid>
 </h:form>

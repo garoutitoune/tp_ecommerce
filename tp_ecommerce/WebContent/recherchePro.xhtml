@@ -1,0 +1,87 @@
+<!DOCTYPE html >
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Accueil</title>
+
+</h:head>
+<h:body>
+	<ui:composition template="/templates/layout.xhtml">
+		<ui:define name="monCorp">
+			<p:growl id="message" showDetail="true" />
+			<h:form>
+
+				<span class="ui-inputgroup-addon"><p:selectOneMenu
+						value="#{proMB.categorie.id}">
+						<f:selectItem itemLabel="Select une categorie" itemValue="" />
+						<f:selectItems value="#{sessionScope.listeCaSession}" var="ca"
+							itemLabel="#{ca.id} - #{ca.nom}" itemValue="#{ca.id}" />
+
+					</p:selectOneMenu></span>
+				<p:inputText placeholder="Nom du produit"
+					value="#{proMB.produit.designation}" />
+					<h:commandButton action="#{proMB.rechercherByDesignation}" value="Rechercher"/>
+
+			</h:form>
+			<div>
+				<p:fieldset legend="Categorie">
+					<h:form>
+
+						<p:dataTable var="pro" value="#{sessionScope.listeProRechSession}"
+							id="tableau">
+
+							<f:facet name="header">
+								<p:outputPanel>
+									<h:outputText
+										value="Liste de(s) produit(s) recherché(s)(#{sessionScope.listeProRechSession.size()})" />
+
+								</p:outputPanel>
+
+							</f:facet>
+
+
+							<p:column headerText="Designation">
+								<h:outputText value="#{pro.designation}" />
+							</p:column>
+
+							<p:column headerText="Description">
+								<h:outputText value="#{pro.description}" />
+							</p:column>
+
+							<p:column headerText="Photo">
+								<h:graphicImage value="#{pro.image}" />
+							</p:column>
+
+							<p:column headerText="Prix">
+								<h:outputText value="#{pro.prix}" />
+							</p:column>
+
+							<p:column headerText="Quantite">
+								<h:outputText value="#{pro.quantite}" />
+							</p:column>
+							
+						</p:dataTable>
+					</h:form>
+				</p:fieldset>
+
+				
+
+
+			</div>
+
+		</ui:define>
+
+
+	</ui:composition>
+
+</h:body>
+</html>
+
+
+
+

@@ -52,4 +52,10 @@ public class ProduitServiceImpl implements IProduitService{
 		return proDao.getProduitById(pro);
 	}
 
+	@Override
+	public List<Produit> getProduitByDes(Produit pro, Categorie ca) {
+		pro.setCategorie(ca);
+		return proDao.getProduitByDescr(pro);
+	}
+
 }

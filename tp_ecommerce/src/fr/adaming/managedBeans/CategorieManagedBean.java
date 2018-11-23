@@ -87,7 +87,12 @@ public class CategorieManagedBean implements Serializable {
 		}
 	}
 	
+	public String modifierLienCategorie() {
+		return "modifierCat";
+	}
+	
 	public String modifierCategorie() {
+		this.categorie.setPhoto(file.getContents());
 		int verif=caService.modifierCategorie(categorie);
 		if(verif!=0) {
 			// si tout c'est bien passé recupère la liste et je l'injecte
@@ -99,7 +104,7 @@ public class CategorieManagedBean implements Serializable {
 		}else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("l'ajout a échoué"));
 			
-			return "ajouter";
+			return "modifierCat";
 		}
 		
 	}
