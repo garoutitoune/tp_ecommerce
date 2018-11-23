@@ -59,7 +59,7 @@
 									<f:setPropertyActionListener value="#{cat}"
 										target="#{caMB.categorie}" />
 								</p:commandLink>
-								<p:commandLink title="modifier" action="#{proMB.modifierLienCategorie}" update="tableau"
+								<p:commandLink title="modifier" action="#{caMB.modifierLienCategorie}" update="tableau"
 									ajax="false">
 									<h:graphicImage value="/resources/images/editer.png" />
 									<f:setPropertyActionListener value="#{cat}"
@@ -124,7 +124,7 @@
 										target="#{proMB.produit}" />
 								</p:commandLink>
 
-								<p:commandLink title="modifier" action="#{caMB.modifierLienProduit}" update="tableau"
+								<p:commandLink title="modifier" action="#{proMB.modifierLienProduit}" update="tableau"
 									ajax="false">
 									<h:graphicImage value="/resources/images/editer.png" />
 									<f:setPropertyActionListener value="#{pro}"

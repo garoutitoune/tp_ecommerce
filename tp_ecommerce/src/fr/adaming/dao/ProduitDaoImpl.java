@@ -73,7 +73,13 @@ public class ProduitDaoImpl implements IProduitDao {
 		String req="SELECT pro FROM Produit pro WHERE pro.categorie.id=:pIdCa";
 		
 		Query query=em.createQuery(req);
+		//passage avec params
+		query.setParameter("pIdCa", pro.getCategorie().getId());
+		
+		
 		List<Produit> liste = query.getResultList();
+		
+		
 
 		for (Produit pr:liste) {
 			pr.setImage("data:image/png);base64," + Base64.encodeBase64String(pr.getPhoto()));
