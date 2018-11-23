@@ -2,6 +2,7 @@ package fr.adaming.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +27,7 @@ public class Gerant {
 	private String mdp;
 	
 	//transformation de l'association UML en java
-	@ManyToMany
+	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="ger_cat", joinColumns=@JoinColumn(name="g_id"),inverseJoinColumns=@JoinColumn(name="ca_id"))
 	private List<Categorie> categorie;
 

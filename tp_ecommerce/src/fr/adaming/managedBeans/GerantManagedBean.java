@@ -14,6 +14,7 @@ import fr.adaming.model.Gerant;
 import fr.adaming.model.Produit;
 import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IGerantService;
+import fr.adaming.service.IProduitService;
 
 @ManagedBean(name="gMB")
 @RequestScoped
@@ -25,6 +26,9 @@ public class GerantManagedBean implements Serializable{
 	
 	@EJB
 	private ICategorieService caService;
+	
+	@EJB
+	private IProduitService proService;
 	
 	// declaration des attributs
 	private Gerant gerant;
@@ -77,11 +81,14 @@ public class GerantManagedBean implements Serializable{
 
 			// recuperer les categories
 			this.listeCategorie=caService.getAllCategorie();
+			
 			// recuperer les produits
+			this.listeProduit=proService.getAllProduit();
 		
 			// ajouter le formateur dans la session
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("gSession", gOut);
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listeCaSession", this.listeCategorie);
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listeProSession", this.listeProduit);
 			
 
 			return "accueil";

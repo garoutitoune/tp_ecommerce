@@ -15,27 +15,28 @@ import org.primefaces.model.UploadedFile;
 
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Gerant;
-import fr.adaming.service.ICategorieService;
+import fr.adaming.model.Produit;
+import fr.adaming.service.IProduitService;
 
-@ManagedBean(name="caMB")
+@ManagedBean(name = "proMB")
 @RequestScoped
-public class CategorieManagedBean implements Serializable {
+public class ProduitManagedBean implements Serializable {
 
-	// transformation de l'association uml en java
+	// transformation de l'association uml en JAVA
 	@EJB
-	private ICategorieService caService;
+	private IProduitService proService;
 
 	// declaration des attributs
-
+	private Produit produit;
 	private Categorie categorie;
 	private Gerant gerant;
 	private UploadedFile file;
 
 	HttpSession maSession;
 
-	// constructeur vide
-	public CategorieManagedBean() {
-		this.categorie=new Categorie();
+	public ProduitManagedBean() {
+		this.produit = new Produit();
+		this.categorie = new Categorie();
 	}
 
 	// init
@@ -48,6 +49,8 @@ public class CategorieManagedBean implements Serializable {
 		// recuperer le formateur de la session
 		this.gerant = (Gerant) maSession.getAttribute("gSession");
 	}
+	
+	
 
 	public Categorie getCategorie() {
 		return categorie;
@@ -56,7 +59,14 @@ public class CategorieManagedBean implements Serializable {
 	public void setCategorie(Categorie categorie) {
 		this.categorie = categorie;
 	}
-	
+
+	public Produit getProduit() {
+		return produit;
+	}
+
+	public void setProduit(Produit produit) {
+		this.produit = produit;
+	}
 
 	public UploadedFile getFile() {
 		return file;
@@ -66,59 +76,59 @@ public class CategorieManagedBean implements Serializable {
 		this.file = file;
 	}
 
-	public String ajouterCategorie() {
-		
-		this.categorie.setPhoto(file.getContents());
+	public String ajouterProduit() {
+		this.produit.setPhoto(file.getContents());
+		Produit proOut = proService.addProduit(produit, categorie);
 
-		// j'ajoute la categorie et le gerant avec
-		Categorie caOut = caService.addCategorie(categorie, gerant);
-		if (caOut.getId() != 0) {
+		if (proOut.getId() != 0) {
 			// si tout c'est bien passé recupère la liste et je l'injecte
-			List<Categorie> liste = caService.getAllCategorie();
+			List<Produit> liste = proService.getAllProduit();
 
 			// mettre a jour la liste dans la session
-			maSession.setAttribute("listeCaSession", liste);
+			maSession.setAttribute("listeProSession", liste);
 			return "accueil";
 
-		}else {
+		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("l'ajout a échoué"));
-			
-			return "ajouter";
+
+			return "ajouterPro";
 		}
 	}
 	
-	public String modifierCategorie() {
-		int verif=caService.modifierCategorie(categorie);
-		if(verif!=0) {
+	
+	public String supprimerProduit() {
+		int verif=proService.deleteProduit(produit);
+		
+		if(verif!=0){
 			// si tout c'est bien passé recupère la liste et je l'injecte
-			List<Categorie> liste = caService.getAllCategorie();
+			List<Produit> liste = proService.getAllProduit();
 
 			// mettre a jour la liste dans la session
-			maSession.setAttribute("listeCaSession", liste);
+			maSession.setAttribute("listeProSession", liste);
 			return "accueil";
-		}else {
+
+		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("l'ajout a échoué"));
-			
-			return "ajouter";
+
+			return "accueil";
 		}
-		
 	}
 	
-	public String supprimerCategorie() {
-		int verif=caService.supprimerCategorie(categorie);
-		if(verif!=0) {
+	
+	public String modifierProduit() {
+		int verif=proService.modifierProduit(produit, categorie);
+		if(verif!=0){
 			// si tout c'est bien passé recupère la liste et je l'injecte
-			List<Categorie> liste = caService.getAllCategorie();
+			List<Produit> liste = proService.getAllProduit();
 
 			// mettre a jour la liste dans la session
-			maSession.setAttribute("listeCaSession", liste);
-			return "supprimer";
-		}else {
+			maSession.setAttribute("listeProSession", liste);
+			return "modifierPro";
+
+		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("l'ajout a échoué"));
-			
+
 			return "accueil";
 		}
-		
 	}
-
 }

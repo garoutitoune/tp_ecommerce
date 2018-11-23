@@ -42,6 +42,7 @@ public class CategorieDaoImpl implements ICategorieDao {
 	@Override
 	public int modifierCategorie(Categorie ca) {
 		String req="UPDATE Categorie ca SET ca.nom=:pNom, ca.photo=:pPhoto, ca.description=:pDescription WHERE ca.id=:pIdca";
+		
 		Query query=em.createQuery(req);
 		
 		query.setParameter("pNom", ca.getNom());
