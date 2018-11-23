@@ -1,10 +1,12 @@
 package fr.adaming.managedBeans;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -19,7 +21,7 @@ import fr.adaming.model.Produit;
 import fr.adaming.service.IProduitService;
 
 @ManagedBean(name = "proMB")
-@RequestScoped
+@SessionScoped
 public class ProduitManagedBean implements Serializable {
 
 	// transformation de l'association uml en JAVA
@@ -31,6 +33,7 @@ public class ProduitManagedBean implements Serializable {
 	private Categorie categorie;
 	private Gerant gerant;
 	private UploadedFile file;
+	private List<Produit> listeProds;
 
 	HttpSession maSession;
 
@@ -48,6 +51,8 @@ public class ProduitManagedBean implements Serializable {
 
 		// recuperer le formateur de la session
 		this.gerant = (Gerant) maSession.getAttribute("gSession");
+		
+		
 	}
 	
 	
@@ -76,6 +81,27 @@ public class ProduitManagedBean implements Serializable {
 		this.file = file;
 	}
 
+	public List<Produit> getListeProds() {
+		return listeProds;
+	}
+
+	public void setListeProds(List<Produit> listeProds) {
+		this.listeProds = listeProds;
+	}
+
+	//méthodes
+	
+	public String listeprodsmeth(int i) throws IOException {
+		//recup la liste des produits pour 1 catég
+		System.out.println("*********************"+i);
+		this.categorie.setId(i);
+		this.listeProds=proService.getAllProduitByCat(new Produit(), this.categorie);
+		return "voirProds1Categ.xhtml";
+	}
+	
+	
+	
+	
 	public String ajouterProduit() {
 		this.produit.setPhoto(file.getContents());
 		Produit proOut = proService.addProduit(produit, categorie);

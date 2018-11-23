@@ -24,10 +24,10 @@
         
         <p:submenu label="Parcourir les catégories" icon="ui-icon-circle-zoomout">
         	<p:submenu label="Alimentaire">
-        		<p:menuitem value="Produits Frais" url="#" />
+        		<p:menuitem value="Produits Frais" action="#{proMB.listeprodsmeth(1)}" />
         		<p:menuitem value="Autre" url="#" />
         	</p:submenu>
-        	<p:menuitem value="Animalerie" url="#" />
+        	<p:menuitem value="Animalerie" action="#{proMB.listeprodsmeth(2)}" />        	
         	<p:menuitem value="Autre" url="#" />
         	<p:separator/>
         	<p:menuitem value="Voir toutes les catégories" url="#" />
