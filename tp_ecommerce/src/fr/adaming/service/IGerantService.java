@@ -11,5 +11,7 @@ public interface IGerantService {
 	
 	public void mailAjoutCl(String toMail, String sujet, String text);
 	
+	public void PDF();
+	
 
 }

@@ -1,5 +1,9 @@
 package fr.adaming.service;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.sql.SQLException;
+import java.util.List;
 import java.util.Properties;
 
 import javax.activation.DataHandler;
@@ -18,8 +22,18 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+
 import fr.adaming.dao.IGerantDao;
 import fr.adaming.model.Gerant;
+import fr.adaming.model.Produit;
 
 @Stateful
 public class GerantServiceImpl implements IGerantService{
@@ -27,6 +41,8 @@ public class GerantServiceImpl implements IGerantService{
 	// transformation de l'association UML en JAVA
 	@EJB
 	private IGerantDao gDao;
+	@EJB
+	private IProduitService proService;
 
 	@Override
 	public Gerant isExist(Gerant gIn) {
@@ -87,6 +103,82 @@ public class GerantServiceImpl implements IGerantService{
 
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
+		}
+		
+	}
+
+	@Override
+	public void PDF() {
+		Document doc = new Document();
+
+		try {
+			PdfWriter.getInstance(doc, new FileOutputStream("C:\\Users\\INTI0489\\Desktop\\pdftest\\pdf.pdf"));
+			
+			doc.open();
+
+			doc.add(new Paragraph(" "));
+			doc.add(new Paragraph(" "));
+			doc.add(new Paragraph(" "));
+			doc.add(new Paragraph(" "));
+			Paragraph para = new Paragraph("                     ----------------------- Liste des produits -----------------------");
+
+			doc.add(para);
+
+			doc.add(new Paragraph(" "));
+			doc.add(new Paragraph(" "));
+			
+
+			PdfPTable table = new PdfPTable(6);
+
+			PdfPCell c1 = new PdfPCell(new Phrase("Id du produit"));
+			c1.setBackgroundColor(BaseColor.LIGHT_GRAY);
+			table.addCell(c1);
+
+			PdfPCell c2 = new PdfPCell(new Phrase("designation"));
+			c2.setBackgroundColor(BaseColor.LIGHT_GRAY);
+			table.addCell(c2);
+			PdfPCell c3 = new PdfPCell(new Phrase("description"));
+			c3.setBackgroundColor(BaseColor.LIGHT_GRAY);
+			table.addCell(c3);
+			PdfPCell c4 = new PdfPCell(new Phrase("image"));
+			c4.setBackgroundColor(BaseColor.LIGHT_GRAY);
+			table.addCell(c4);
+			PdfPCell c5 = new PdfPCell(new Phrase("prix"));
+			c5.setBackgroundColor(BaseColor.LIGHT_GRAY);
+			table.addCell(c5);
+			PdfPCell c6 = new PdfPCell(new Phrase("quantite"));
+			c6.setBackgroundColor(BaseColor.LIGHT_GRAY);
+			table.addCell(c6);
+			
+			table.setHeaderRows(1);
+			
+			doc.add(table);
+			
+			
+			
+			List<Produit> liste=proService.getAllProduit();
+			for(Produit pro:liste) {
+				table.addCell(String.valueOf(pro));
+			}
+	
+	
+			
+		
+	        
+			doc.add(table);
+			doc.add(new Paragraph(" "));
+			doc.add(new Paragraph(" "));
+			doc.add(new Paragraph(" "));
+			doc.add(new Paragraph(" "));
+			
+			
+			
+			doc.close();
+			
+			
+		} catch (FileNotFoundException | DocumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 	}

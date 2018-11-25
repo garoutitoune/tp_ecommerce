@@ -157,5 +157,10 @@ public class GerantManagedBean implements Serializable {
 		
 		
 	}
+	
+	public String pdf() {
+		gService.PDF();
+		return "accueil";
+	}
 
 }
