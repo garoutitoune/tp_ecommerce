@@ -26,7 +26,8 @@ designiation: <h:inputText value="#{proMB.produit.designation}" />
 prix: <h:inputText value="#{proMB.produit.prix}" />
 quantité: <h:inputText value="#{proMB.produit.quantite}" />
 photo: <p:fileUpload value="#{proMB.file}" mode="simple" skinSimple="true"/>
-Categorie ID : <h:inputText value="#{proMB.categorie.id}"/>
+Categorie ID : <h:outputText value="#{proMB.produit.categorie.id}"/>
+				<h:inputText value="#{proMB.categorie.id}"/>
 
 						
 

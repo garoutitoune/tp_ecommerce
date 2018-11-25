@@ -1,7 +1,11 @@
 
 
 .body{
-	background-color: #358D90;
+	background-image: url("../images/fond.jpg");
+}
+
+.footer{
+	background-color: #31A9AE;
 }
 
 

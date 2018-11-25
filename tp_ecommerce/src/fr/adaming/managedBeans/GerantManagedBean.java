@@ -34,6 +34,9 @@ public class GerantManagedBean implements Serializable {
 	private Gerant gerant;
 	private List<Categorie> listeCategorie;
 	private List<Produit> listeProduit;
+	private String test1;
+	private String sujet;
+	private String mail;
 
 	// constructeur vide
 	public GerantManagedBean() {
@@ -63,6 +66,31 @@ public class GerantManagedBean implements Serializable {
 
 	public void setListeProduit(List<Produit> listeProduit) {
 		this.listeProduit = listeProduit;
+	}
+
+	 
+	public String getTest1() {
+		return test1;
+	}
+
+	public void setTest1(String test1) {
+		this.test1 = test1;
+	}
+
+	public String getSujet() {
+		return sujet;
+	}
+
+	public void setSujet(String sujet) {
+		this.sujet = sujet;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 
 	// les autres methodes
@@ -107,13 +135,27 @@ public class GerantManagedBean implements Serializable {
 		// recuperer les produits
 		this.listeProduit = proService.getAllProduit();
 
-		// ajouter le formateur dans la session
+		// ajouter la liste de categorie et de produit à la session
 		
 		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listeCaSession",
 				this.listeCategorie);
 		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listeProSession",
 				this.listeProduit);
-		return "accueil";
+		return "accueilSite";
+	}
+	
+	public String contactGerant() {
+		String toMail="proxibanque17@gmail.com";
+		
+		String text="la personne "+this.mail +" a essayée de vous joindre pour ce message : " +this.test1;
+		
+		gService.mailAjoutCl(toMail, this.sujet, text);
+		
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("le mail a bien été envoyé"));
+		
+		return "contactGerant";
+		
+		
 	}
 
 }
