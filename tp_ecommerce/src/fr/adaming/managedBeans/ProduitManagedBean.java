@@ -109,12 +109,14 @@ public class ProduitManagedBean implements Serializable {
 	
 	
 
-	public String listeprodsmeth(int i) throws IOException {
+	public void listeprodsmeth(int i) throws IOException {
+//		FacesContext.getCurrentInstance().getExternalContext().redirect("voirProds1Categ.xhtml");
 		//recup la liste des produits pour 1 catég
-		System.out.println("*********************"+i);
 		this.categorie.setId(i);
 		this.listeProds=proService.getAllProduitByCat(new Produit(), this.categorie);
-		return "voirProds1Categ.xhtml";
+		maSession.setAttribute("listeProds1Categ", this.listeProds);
+//		return "voirProds1Categ.xhtml";
+		FacesContext.getCurrentInstance().getExternalContext().redirect("voirProds1Categ.xhtml");
 	}
 	
 	public String produitByCat() {

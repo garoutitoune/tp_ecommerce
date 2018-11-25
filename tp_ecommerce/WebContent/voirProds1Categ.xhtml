@@ -19,9 +19,18 @@
 		<ui:define name="monCorp">
 			
 			<h1>Liste des produits pour une catégorie</h1>
-			<h:form id="idProdsForm">
 			
-			<p:dataTable var="p" value="#{proMB.listeProds}" id="idProds">
+			<h:form id="idProdsForm">
+			<p:growl id="growl" showDetail="true" /> 
+			
+			<p:dataTable var="p" value="#{sessionScope.listeProds1Categ}" id="idProds" paginatorTemplate=" {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
+                 paginator="true" rows="5" paginatorPosition="bottom">
+
+							
+
+							<f:facet name="header">  
+          						<h:outputText value="développer searchcatégorie by id................"/>
+     						</f:facet> 
 
 							<p:column headerText="Photo">
 								<h:graphicImage value="#{p.image}" />
@@ -39,13 +48,58 @@
 								<h:outputText value="#{p.quantite}" />
 							</p:column>
 							
-							<p:column headerText="Operations">
-								<p:commandButton icon="ui-icon-circle-plus" action="paMB.addProd(p)"></p:commandButton>
+							<p:column headerText="Opérations">
+								<p:commandButton icon="ui-icon-circle-plus" action="#{paMB.addProd}" update="@form">
+								<f:setPropertyActionListener value="#{p}" target="#{paMB.produit}"></f:setPropertyActionListener>
+								</p:commandButton>
+								<p:commandButton icon="ui-icon-circle-minus" action="#{paMB.delProd}" update="idProdsForm">
+								<f:setPropertyActionListener value="#{p}" target="#{paMB.produit}"></f:setPropertyActionListener>
+								</p:commandButton>
+								
 							</p:column>
 							
 						</p:dataTable>
 			
-			
+			<br/>
+			<p:dataTable var="li" value="#{paMB.panier.listeLignes}" paginatorTemplate=" {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
+                 paginator="true" rows="5" paginatorPosition="bottom">
+
+							<f:facet name="header">  
+          						<h:outputText value="Panier"/>
+     						</f:facet> 
+
+							<p:column headerText="Photo">
+								<h:graphicImage value="#{li.produit.image}" />
+							</p:column>
+							
+							<p:column headerText="Désignation" >
+								<h:outputText value="#{li.produit.designation}" />
+							</p:column>
+
+							<p:column headerText="Quantité">
+								<h:outputText value="#{li.qt}" />
+							</p:column>
+							
+							<p:column headerText="Prix">
+								<h:outputText value="#{li.prix}" />
+							</p:column>
+							
+							
+							<p:column headerText="Opérations">
+								<p:commandButton icon="ui-icon-circle-plus" action="#{paMB.addProd}" update="idProdsForm">
+								<f:setPropertyActionListener value="#{li.produit}" target="#{paMB.produit}"></f:setPropertyActionListener>
+								</p:commandButton>
+								<p:commandButton icon="ui-icon-circle-minus" action="#{paMB.delProd}" update="idProdsForm">
+								<f:setPropertyActionListener value="#{li.produit}" target="#{paMB.produit}"></f:setPropertyActionListener>
+								</p:commandButton>
+								<p:commandButton icon="ui-icon-trash" action="#{paMB.del2Prod}" update="idProdsForm">
+								<f:setPropertyActionListener value="#{li.produit}" target="#{paMB.produit}"></f:setPropertyActionListener>
+								</p:commandButton>
+								
+							</p:column>
+							
+							
+						</p:dataTable>
 			
 			</h:form>
 			
