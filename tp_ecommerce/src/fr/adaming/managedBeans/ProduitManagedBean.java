@@ -34,6 +34,7 @@ public class ProduitManagedBean implements Serializable {
 	private Gerant gerant;
 	private UploadedFile file;
 	private List<Produit> listeProds;
+	private boolean indice;
 
 	HttpSession maSession;
 
@@ -89,8 +90,25 @@ public class ProduitManagedBean implements Serializable {
 		this.listeProds = listeProds;
 	}
 
+	public Gerant getGerant() {
+		return gerant;
+	}
+
+	public void setGerant(Gerant gerant) {
+		this.gerant = gerant;
+	}
+
+	public boolean isIndice() {
+		return indice;
+	}
+
+	public void setIndice(boolean indice) {
+		this.indice = indice;
+	}
 	//méthodes
 	
+	
+
 	public String listeprodsmeth(int i) throws IOException {
 		//recup la liste des produits pour 1 catég
 		System.out.println("*********************"+i);
@@ -99,6 +117,15 @@ public class ProduitManagedBean implements Serializable {
 		return "voirProds1Categ.xhtml";
 	}
 	
+	public String produitByCat() {
+		//recuperer la liste de produit selon la categorie
+		List<Produit> listePro=proService.getAllProduitByCat(produit, categorie);
+		
+		indice=true;
+		
+		maSession.setAttribute("listeProCatSession", listePro);
+		return "accueil";
+	}
 	
 	
 	

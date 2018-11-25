@@ -9,10 +9,12 @@
 
 <h:head>
 	<title>Le layout</title>
+	<link rel="stylesheet" type="text/css"
+		href="resources/css/monStyle.css" />
 </h:head>
 
-<h:body>
-	<div>
+<h:body styleClass="body">
+	<div class="header">
 		<!-- inserer le header sans modifier  son contenu -->
 		<!-- insert, sert à définir l'endroit où l'on veut rajouter le header -->
 		<ui:insert name="monHeader">
@@ -21,7 +23,7 @@
 		</ui:insert>
 	</div>
 
-	<div>
+	<div class="corp">
 		<!-- inserer le header sans modifier  son contenu -->
 		<!-- insert, sert à définir l'endroit où l'on veut rajouter le corp -->
 		<ui:insert name="monCorp">
@@ -29,7 +31,7 @@
 			<ui:include src="/templates/corps.xhtml"></ui:include>
 		</ui:insert>
 	</div>
-	<div>
+	<div class="footer">
 		<!-- inserer le header sans modifier  son contenu -->
 		<!-- insert, sert à définir l'endroit où l'on veut rajouter le corp -->
 		<ui:insert name="monFooter">

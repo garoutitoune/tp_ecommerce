@@ -10,130 +10,140 @@
 	<title>Accueil</title>
 
 </h:head>
-<h:body >
+<h:body>
 	<ui:composition template="/templates/layout.xhtml">
 		<ui:define name="monCorp">
-			<p:growl id="message" showDetail="true" />
-			<div >
-				<p:fieldset legend="Categorie">
-					<h:form>
 
-						<p:dataTable var="cat" value="#{sessionScope.listeCaSession}"
-							id="tableau">
+			<p:growl id="messages" showDetail="true" />
+			<div>
+				<h:form>
 
-							<f:facet name="header">
-								<p:outputPanel>
-									<h:outputText
-										value="Liste des categories (#{sessionScope.listeCaSession.size()})" />
+					<p:dataTable var="cat" value="#{sessionScope.listeCaSession}"
+						id="tableau">
 
-								</p:outputPanel>
+						<f:facet name="header">
+							<p:outputPanel>
+								<h:outputText
+									value="Liste des categories (#{sessionScope.listeCaSession.size()})" />
 
-							</f:facet>
+							</p:outputPanel>
 
-
-							<p:column headerText="Id" filterBy="#{cat.id}" sortBy="#{cat.id}">
-								<h:outputText value="#{cat.id}" />
-							</p:column>
-
-							<p:column headerText="Nom" filterBy="#{cat.nom}"
-								sortBy="#{cat.nom}">
-								<h:outputText value="#{cat.nom}" />
-							</p:column>
-
-							<p:column headerText="Photo">
-								<h:graphicImage value="#{cat.image}" />
-							</p:column>
-
-							<p:column headerText="Description" filterBy="#{cat.description}"
-								sortBy="#{cat.description}">
-								<h:outputText value="#{cat.description}" />
-							</p:column>
+						</f:facet>
 
 
-							<p:column headerText="Operations">
+						<p:column headerText="Id" filterBy="#{cat.id}" sortBy="#{cat.id}">
+							<h:outputText value="#{cat.id}" />
+						</p:column>
 
-								<p:commandLink action="#{caMB.supprimerCategorie}"
-									 update="tableau" ajax="false">
+						<p:column headerText="Nom" filterBy="#{cat.nom}"
+							sortBy="#{cat.nom}">
+							<h:outputText value="#{cat.nom}" />
+						</p:column>
+
+						<p:column headerText="Photo">
+							<h:graphicImage value="#{cat.image}"
+								style="witdh: 100px; height: 100px;" />
+						</p:column>
+
+						<p:column headerText="Description" filterBy="#{cat.description}"
+							sortBy="#{cat.description}">
+							<h:outputText value="#{cat.description}" />
+						</p:column>
+
+
+						<p:column headerText="Operations">
+
+							<p:commandLink action="#{caMB.supprimerCategorie}"
+								update="tableau" ajax="false">
 								<h:graphicImage value="/resources/images/supprimer.png"
-							title="Supprimer" />
-									<f:setPropertyActionListener value="#{cat}"
-										target="#{caMB.categorie}" />
-								</p:commandLink>
-								<p:commandLink title="modifier" action="#{caMB.modifierLienCategorie}" update="tableau"
-									ajax="false">
-									<h:graphicImage value="/resources/images/editer.png" />
-									<f:setPropertyActionListener value="#{cat}"
-										target="#{caMB.categorie}" />
-								</p:commandLink>
-							</p:column>
-						</p:dataTable>
-					</h:form>
-				</p:fieldset>
+									title="Supprimer" />
+								<f:setPropertyActionListener value="#{cat}"
+									target="#{caMB.categorie}" />
+							</p:commandLink>
+							<p:commandLink title="modifier"
+								action="#{caMB.modifierLienCategorie}" update="tableau"
+								ajax="false">
+								<h:graphicImage value="/resources/images/editer.png" />
+								<f:setPropertyActionListener value="#{cat}"
+									target="#{caMB.categorie}" />
+							</p:commandLink>
+							
+							<p:commandLink title="Voir produit" action="#{proMB.produitByCat}" ajax="false">
+							<h:graphicImage value="/resources/images/eye.png"/>
+							<f:setPropertyActionListener value="#{cat}" target="#{proMB.categorie}"></f:setPropertyActionListener>
+							
+							
+							</p:commandLink>
+						</p:column>
+					</p:dataTable>
+				</h:form>
+
 			</div>
 
-			<div >
-				<p:fieldset legend="Categorie">
-					<h:form>
+			<div>
 
-						<p:dataTable var="pro" value="#{sessionScope.listeProSession}"
-							id="tableau">
+				<h:form rendered="#{proMB.indice}">
 
-							<f:facet name="header">
-								<p:outputPanel>
-									<h:outputText
-										value="Liste de(s) produit(s) (#{sessionScope.listeProSession.size()})" />
+					<p:dataTable var="pro" value="#{sessionScope.listeProCatSession}"
+						id="tableau" >
 
-								</p:outputPanel>
+						<f:facet name="header">
+							<p:outputPanel>
+								<h:outputText
+									value="Liste de(s) produit(s) (#{sessionScope.listeProCatSession.size()})" />
 
-							</f:facet>
+							</p:outputPanel>
+
+						</f:facet>
 
 
-							<p:column headerText="Id" filterBy="#{pro.id}" sortBy="#{pro.id}">
-								<h:outputText value="#{pro.id}" />
-							</p:column>
+						<p:column headerText="Id" filterBy="#{pro.id}" sortBy="#{pro.id}">
+							<h:outputText value="#{pro.id}" />
+						</p:column>
 
-							<p:column headerText="Designation" filterBy="#{pro.designation}"
-								sortBy="#{pro.designation}">
-								<h:outputText value="#{pro.designation}" />
-							</p:column>
+						<p:column headerText="Designation" filterBy="#{pro.designation}"
+							sortBy="#{pro.designation}">
+							<h:outputText value="#{pro.designation}" />
+						</p:column>
 
-							<p:column headerText="Photo">
-								<h:graphicImage value="#{pro.image}" />
-							</p:column>
+						<p:column headerText="Photo">
+							<h:graphicImage value="#{pro.image}" />
+						</p:column>
 
-							<p:column headerText="Description" filterBy="#{pro.description}"
-								sortBy="#{pro.description}">
-								<h:outputText value="#{pro.description}" />
-							</p:column>
+						<p:column headerText="Description" filterBy="#{pro.description}"
+							sortBy="#{pro.description}">
+							<h:outputText value="#{pro.description}" />
+						</p:column>
 
-							<p:column headerText="Prix" filterBy="#{pro.prix}"
-								sortBy="#{pro.prix}">
-								<h:outputText value="#{pro.prix}" />
-							</p:column>
-							<p:column headerText="Quantite" filterBy="#{pro.quantite}"
-								sortBy="#{pro.quantite}">
-								<h:outputText value="#{pro.quantite}" />
-							</p:column>
-							<p:column headerText="Operations">
+						<p:column headerText="Prix" filterBy="#{pro.prix}"
+							sortBy="#{pro.prix}">
+							<h:outputText value="#{pro.prix}" />
+						</p:column>
+						<p:column headerText="Quantite" filterBy="#{pro.quantite}"
+							sortBy="#{pro.quantite}">
+							<h:outputText value="#{pro.quantite}" />
+						</p:column>
+						<p:column headerText="Operations">
 
-								<p:commandLink action="#{proMB.supprimerProduit}"
-									update="tableau" ajax="false">
-									<h:graphicImage value="/resources/images/supprimer.png" />
+							<p:commandLink action="#{proMB.supprimerProduit}"
+								update="tableau" ajax="false">
+								<h:graphicImage value="/resources/images/supprimer.png" />
 
-									<f:setPropertyActionListener value="#{pro}"
-										target="#{proMB.produit}" />
-								</p:commandLink>
+								<f:setPropertyActionListener value="#{pro}"
+									target="#{proMB.produit}" />
+							</p:commandLink>
 
-								<p:commandLink title="modifier" action="#{proMB.modifierLienProduit}" update="tableau"
-									ajax="false">
-									<h:graphicImage value="/resources/images/editer.png" />
-									<f:setPropertyActionListener value="#{pro}"
-										target="#{proMB.produit}" />
-								</p:commandLink>
-							</p:column>
-						</p:dataTable>
-					</h:form>
-				</p:fieldset>
+							<p:commandLink title="modifier"
+								action="#{proMB.modifierLienProduit}" update="tableau"
+								ajax="false">
+								<h:graphicImage value="/resources/images/editer.png" />
+								<f:setPropertyActionListener value="#{pro}"
+									target="#{proMB.produit}" />
+							</p:commandLink>
+						</p:column>
+					</p:dataTable>
+				</h:form>
+
 
 				<h:form>
 					<h:link outcome="ajouterPro">
@@ -141,12 +151,11 @@
 							title="ajouterPro" />
 					</h:link>
 				</h:form>
-
 			</div>
 
+			
+
 		</ui:define>
-
-
 	</ui:composition>
 
 </h:body>

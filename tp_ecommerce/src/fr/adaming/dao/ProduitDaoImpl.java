@@ -112,6 +112,22 @@ public class ProduitDaoImpl implements IProduitDao {
 		}
 		return liste;
 	}
+
+	@Override
+	public int modifierProduitSansPhoto(Produit pro) {
+		String req="UPDATE produits SET description=:pDescription, designation=:pDesign, prix=:pPrix, quantite=:pQtite, selectionne=:pSelection WHERE id_p=:pIdp AND ca_id=:pIdCa";
+		Query query=em.createNativeQuery(req, Produit.class);
+		
+		query.setParameter("pDescription", pro.getDescription());
+		query.setParameter("pDesign", pro.getDesignation());
+		query.setParameter("pPrix", pro.getPrix());
+		query.setParameter("pQtite", pro.getQuantite());
+		query.setParameter("pSelection", pro.isSelectionne());
+		query.setParameter("pIdp", pro.getId());
+		query.setParameter("pIdCa", pro.getCategorie().getId());
+		
+		return query.executeUpdate();
+	}
 	
 	
 

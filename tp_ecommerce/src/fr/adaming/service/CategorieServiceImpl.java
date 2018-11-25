@@ -37,8 +37,13 @@ public class CategorieServiceImpl implements ICategorieService{
 
 	@Override
 	public int modifierCategorie(Categorie ca) {
-		
-		return caDao.modifierCategorie(ca);
+		System.out.println("c'est quoi ce truc " +ca.getPhoto());
+		if(ca.getPhoto().length!=0) {
+			return caDao.modifierCategorie(ca);
+		}else {
+			
+			return caDao.modifierCategoriePhoto(ca);
+		}
 	}
 
 	@Override
@@ -47,14 +52,6 @@ public class CategorieServiceImpl implements ICategorieService{
 		return caDao.supprimerCategorie(ca);
 	}
 
-	@Override
-	public int modifierCategoriePhoto(Categorie ca) {
-		if(ca.getPhoto()!=null) {
-			return caDao.modifierCategoriePhoto(ca);
-		}else {
-			return caDao.supprimerCategorie(ca);
-		}
-		
-	}
+	
 
 }

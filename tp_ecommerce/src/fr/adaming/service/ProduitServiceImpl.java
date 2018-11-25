@@ -37,7 +37,12 @@ public class ProduitServiceImpl implements IProduitService{
 	@Override
 	public int modifierProduit(Produit pro, Categorie ca) {
 		pro.setCategorie(ca);
-		return proDao.modifierProduit(pro);
+		if(pro.getPhoto().length!=0) {
+			return proDao.modifierProduit(pro);
+		}else {
+			return proDao.modifierProduit(pro);
+		}
+		
 	}
 
 	@Override

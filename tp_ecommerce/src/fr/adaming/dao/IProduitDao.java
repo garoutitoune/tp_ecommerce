@@ -23,5 +23,7 @@ public interface IProduitDao {
 	public Produit getProduitById(Produit pro);
 	
 	public List<Produit> getProduitByDescr(Produit pro);
+	
+	public int modifierProduitSansPhoto(Produit pro);
 
 }

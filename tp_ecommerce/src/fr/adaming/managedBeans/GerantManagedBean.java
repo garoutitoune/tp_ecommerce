@@ -16,80 +16,74 @@ import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IGerantService;
 import fr.adaming.service.IProduitService;
 
-@ManagedBean(name="gMB")
+@ManagedBean(name = "gMB")
 @RequestScoped
-public class GerantManagedBean implements Serializable{
-	
-	//transformation de l'association UML en JAVA 
+public class GerantManagedBean implements Serializable {
+
+	// transformation de l'association UML en JAVA
 	@EJB
 	private IGerantService gService;
-	
+
 	@EJB
 	private ICategorieService caService;
-	
+
 	@EJB
 	private IProduitService proService;
-	
+
 	// declaration des attributs
 	private Gerant gerant;
 	private List<Categorie> listeCategorie;
 	private List<Produit> listeProduit;
-	
-	//constructeur vide
-	public GerantManagedBean() {
-		this.gerant=new Gerant();
-		
-	}
 
+	// constructeur vide
+	public GerantManagedBean() {
+		this.gerant = new Gerant();
+
+	}
 
 	public Gerant getGerant() {
 		return gerant;
 	}
 
-
 	public void setGerant(Gerant gerant) {
 		this.gerant = gerant;
 	}
-
 
 	public List<Categorie> getListeCategorie() {
 		return listeCategorie;
 	}
 
-
 	public void setListeCategorie(List<Categorie> listeCategorie) {
 		this.listeCategorie = listeCategorie;
 	}
-
 
 	public List<Produit> getListeProduit() {
 		return listeProduit;
 	}
 
-
 	public void setListeProduit(List<Produit> listeProduit) {
 		this.listeProduit = listeProduit;
 	}
-	
-	//les autres methodes
+
+	// les autres methodes
 	public String seConnecter() {
 
 		try {
 			// aller chercher le formateur dans la bd
-			Gerant gOut=gService.isExist(gerant);
-			
+			Gerant gOut = gService.isExist(gerant);
 
 			// recuperer les categories
-			this.listeCategorie=caService.getAllCategorie();
-			
+			this.listeCategorie = caService.getAllCategorie();
+
 			// recuperer les produits
-			this.listeProduit=proService.getAllProduit();
-		
+			this.listeProduit = proService.getAllProduit();
+
 			// ajouter le formateur dans la session
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("gSession", gOut);
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listeCaSession", this.listeCategorie);
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listeProSession", this.listeProduit);
-			
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listeCaSession",
+					this.listeCategorie);
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listeProSession",
+					this.listeProduit);
 
 			return "accueil";
 		} catch (Exception ex) {
@@ -105,9 +99,21 @@ public class GerantManagedBean implements Serializable{
 
 		return "login";
 	}
-	
-	
-	
-	
+
+	public String accessSite() {
+		// recuperer les categories
+		this.listeCategorie = caService.getAllCategorie();
+
+		// recuperer les produits
+		this.listeProduit = proService.getAllProduit();
+
+		// ajouter le formateur dans la session
+		
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listeCaSession",
+				this.listeCategorie);
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listeProSession",
+				this.listeProduit);
+		return "accueil";
+	}
 
 }
