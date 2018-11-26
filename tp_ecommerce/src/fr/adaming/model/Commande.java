@@ -25,9 +25,9 @@ public class Commande {
 	private Date date;
 	
 	//asso uml java
-	@OneToMany(mappedBy="commande")
+	@OneToMany(mappedBy="commande", cascade=CascadeType.ALL)
 	private List<LigneCommande> listeLignes;
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="cl_id", referencedColumnName="id_cl")
 	private Client client;
 	

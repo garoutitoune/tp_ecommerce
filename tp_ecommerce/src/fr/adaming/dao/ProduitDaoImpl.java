@@ -87,7 +87,9 @@ public class ProduitDaoImpl implements IProduitDao {
 
 	@Override
 	public Produit getProduitById(Produit pro) {
+		System.out.println("dao:avant de trouver produit");
 		Produit proOut=em.find(Produit.class, pro.getId());
+		System.out.println("dao: produit trouvé");
 	proOut.setImage("data:image/png);base64," + Base64.encodeBase64String(proOut.getPhoto()));	
 	
 		return proOut;

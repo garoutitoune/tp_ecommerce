@@ -2,6 +2,7 @@ package fr.adaming.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,7 +25,7 @@ public class Client {
 	private String tel;
 	private String mdp;
 	//asso uml java
-	@OneToMany(mappedBy="client")
+	@OneToMany(mappedBy="client",cascade=CascadeType.ALL)
 	private List<Commande> listeCommande;
 	
 	//construc

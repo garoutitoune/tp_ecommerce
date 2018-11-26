@@ -22,10 +22,10 @@ public class LigneCommande {
 	private int qt;
 	private double prix;
 	//assos uml java
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="p_id", referencedColumnName="id_p")
 	private Produit produit;
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="co_id",referencedColumnName="id_co")
 	private Commande commande;
 	

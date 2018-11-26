@@ -2,6 +2,7 @@ package fr.adaming.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -37,7 +38,7 @@ public class Produit {
 	@ManyToOne
 	@JoinColumn(name="ca_id", referencedColumnName="id_ca")
 	private Categorie categorie;
-	@OneToMany(mappedBy="produit")
+	@OneToMany(mappedBy="produit", cascade=CascadeType.ALL)
 	private List<LigneCommande> listeLignes;
 	
 	

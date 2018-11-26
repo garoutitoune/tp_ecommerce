@@ -16,6 +16,8 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao{
 	
 	@Override
 	public LigneCommande addLigne(LigneCommande ligne) {
+		
+		
 		em.persist(ligne);
 		return ligne;
 	}

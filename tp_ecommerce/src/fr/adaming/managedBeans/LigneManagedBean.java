@@ -67,6 +67,7 @@ public class LigneManagedBean {
 	
 	//methodes (ajouter les try catch)
 	public void addLigne() {
+		
 		liservice.addLigne(this.ligne,this.commande, this.produit);
 	}
 	public void delLigne() {

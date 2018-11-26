@@ -53,7 +53,7 @@ public class ProduitServiceImpl implements IProduitService{
 
 	@Override
 	public Produit getProduitById(Produit pro) {
-		
+		System.out.println("produit service prodao"+proDao+"proid"+pro.getId());
 		return proDao.getProduitById(pro);
 	}
 

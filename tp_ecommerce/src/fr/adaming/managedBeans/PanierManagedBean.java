@@ -17,10 +17,13 @@ import fr.adaming.model.Commande;
 import fr.adaming.model.LigneCommande;
 import fr.adaming.model.Panier;
 import fr.adaming.model.Produit;
+import fr.adaming.service.IClientService;
 import fr.adaming.service.ICommandeService;
 import fr.adaming.service.ILigneService;
 import fr.adaming.service.IPanierService;
+import fr.adaming.service.IProduitService;
 import fr.adaming.service.LigneServiceImpl;
+import fr.adaming.service.ProduitServiceImpl;
 
 @ManagedBean(name="paMB")
 @SessionScoped
@@ -39,6 +42,10 @@ public class PanierManagedBean implements Serializable{
 	private ILigneService liservice;
 	@EJB
 	private ICommandeService coservice;
+	@EJB
+	private IProduitService proservice;
+	@EJB
+	private IClientService clservice;
 
 	public PanierManagedBean() {
 		super();
@@ -104,17 +111,16 @@ public class PanierManagedBean implements Serializable{
 		try {
 			System.out.println("je save le panieer!");
 			
-			
-//			Commande commande=new Commande(new Date());
-////			coservice.addCommande(commande, client);
-//			for (LigneCommande li : panier.getListeLignes()) {
-//				liservice.addLigne(li, commande, li.getProduit());
-//			}
 			System.out.println("id produit:"+panier.getListeLignes().get(0).getProduit().getId());
+			Client client=new Client();
+			clservice.addClient(client);
+			Commande commande=new Commande(new Date());
+			coservice.addCommande(commande, client);
+			System.out.println("apres enregistrement commande");
 			
-			liservice.addLigne(new LigneCommande(), new Commande(), new Produit());
-			
-			
+			for (LigneCommande li : this.panier.getListeLignes()) {
+				liservice.addLigne(li, commande, li.getProduit());
+			}
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Confirmation","La commande a été enregistrée."));
 		} catch (Exception e) {
 			System.out.println("error message:"+e.getMessage());
