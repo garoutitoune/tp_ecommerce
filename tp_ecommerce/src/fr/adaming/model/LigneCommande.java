@@ -1,5 +1,6 @@
 package fr.adaming.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,10 +22,10 @@ public class LigneCommande {
 	private int qt;
 	private double prix;
 	//assos uml java
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="p_id", referencedColumnName="id_p")
 	private Produit produit;
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="co_id",referencedColumnName="id_co")
 	private Commande commande;
 	

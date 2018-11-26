@@ -4,7 +4,9 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import fr.adaming.model.Commande;
 import fr.adaming.model.LigneCommande;
+import fr.adaming.model.Panier;
 
 @Stateless
 public class LigneCommandeDaoImpl implements ILigneCommandeDao{
@@ -26,6 +28,21 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao{
 	@Override
 	public void delLigne(LigneCommande ligne) {
 		em.remove(this.searchLigneById(ligne));
+	}
+
+	@Override
+	public void savePanier(Panier panier, Commande commande) {
+		//lier les objets en java
+		for (LigneCommande li : panier.getListeLignes()) {
+			li.setCommande(commande);
+		}
+		//persister la classe maitre
+		for (LigneCommande li : panier.getListeLignes()) {
+			em.persist(li);
+		}
+		//persister l'esclave
+		em.persist(commande);		
+		
 	}
 
 }

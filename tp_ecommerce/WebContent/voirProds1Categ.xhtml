@@ -92,15 +92,19 @@
 								<p:commandButton icon="ui-icon-circle-minus" action="#{paMB.delProd}" update="idProdsForm">
 								<f:setPropertyActionListener value="#{li.produit}" target="#{paMB.produit}"></f:setPropertyActionListener>
 								</p:commandButton>
-								<p:commandButton icon="ui-icon-trash" action="#{paMB.del2Prod}" update="idProdsForm">
+								<p:commandButton icon="ui-icon-trash" action="#{paMB.delProd2}" update="idProdsForm">
 								<f:setPropertyActionListener value="#{li.produit}" target="#{paMB.produit}"></f:setPropertyActionListener>
 								</p:commandButton>
 								
+								<p:commandButton icon="ui-icon-check" action="#{paMB.savePanier}" >
+								</p:commandButton>
 							</p:column>
 							
 							
 						</p:dataTable>
-			
+			<h1 style="text-align: center; color: red">
+		<h:messages />
+	</h1>
 			</h:form>
 			
 			

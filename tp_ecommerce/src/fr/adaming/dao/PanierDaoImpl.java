@@ -3,10 +3,21 @@ package fr.adaming.dao;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 
+import fr.adaming.model.Client;
+import fr.adaming.model.Commande;
 import fr.adaming.model.LigneCommande;
 import fr.adaming.model.Panier;
 import fr.adaming.model.Produit;
+import fr.adaming.service.CommandeServiceImpl;
+import fr.adaming.service.ICommandeService;
+import fr.adaming.service.ILigneService;
+import fr.adaming.service.LigneServiceImpl;
 
 @Stateless
 public class PanierDaoImpl implements IPanierDao{
@@ -78,6 +89,35 @@ public class PanierDaoImpl implements IPanierDao{
 			}
 		}
 		return panier;		
+	}
+
+	
+
+	@Override
+	public void savePanier(Panier panier, Commande commande) {
+		
+//		//lier les objets en java
+//		for (LigneCommande li : panier.getListeLignes()) {
+//			li.setCommande(commande);
+//		}
+		
+		ILigneService liservice=new LigneServiceImpl();
+		ICommandeService coservice=new CommandeServiceImpl();
+		
+		//ajouter les lignes de commande
+		for (LigneCommande li : panier.getListeLignes()) {
+			liservice.addLigne(li, commande, li.getProduit());
+		}
+		//ajouter la commande
+		coservice.addCommande(commande, commande.getClient());
+		
+//		//persister la classe maitre
+//		for (LigneCommande li : panier.getListeLignes()) {
+//			em.persist(li);
+//		}
+//		//persister l'esclave
+//		em.persist(commande);
+		
 	}
 
 	

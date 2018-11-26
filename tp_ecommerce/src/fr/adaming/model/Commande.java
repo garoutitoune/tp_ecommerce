@@ -3,6 +3,7 @@ package fr.adaming.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +27,7 @@ public class Commande {
 	//asso uml java
 	@OneToMany(mappedBy="commande")
 	private List<LigneCommande> listeLignes;
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="cl_id", referencedColumnName="id_cl")
 	private Client client;
 	
