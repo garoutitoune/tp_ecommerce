@@ -2,6 +2,7 @@ package fr.adaming.service;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Properties;
@@ -25,6 +26,7 @@ import javax.mail.internet.MimeMultipart;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
@@ -78,7 +80,7 @@ public class GerantServiceImpl implements IGerantService{
 
 	         // first part (the html)
 	         BodyPart messageBodyPart = new MimeBodyPart();
-	         String htmlText = "<H1>Bonjour</H1><div>"+text+" <a href="+"http://localhost:8080/tp_ecommerce/"+" target="+"_blank"+">mistigris et ses amis lien</a> </div><img src=\"cid:image\">";
+	         String htmlText = "<H1>Bonjour</H1><div>"+text+" <br/> Pour accedez au site <a href="+"http://localhost:8080/tp_ecommerce/"+" target="+"_blank"+"> mistigris et ses amis lien</a> </div>";
 	         messageBodyPart.setContent(htmlText, "text/html");
 	         // add it
 	         multipart.addBodyPart(messageBodyPart);
@@ -86,10 +88,10 @@ public class GerantServiceImpl implements IGerantService{
 	         // second part (the image)
 	         messageBodyPart = new MimeBodyPart();
 	         DataSource fds = new FileDataSource(
-	            "C:\\Users\\INTI0489\\Desktop\\formation\\WorkSpaces\\03_WorkSpace_JSF\\Projet_proxibanque\\WebContent\\resources\\images\\logo.png");
+	            "C:\\Users\\INTI0489\\Desktop\\pdftest\\pdf.pdf");
 
 	         messageBodyPart.setDataHandler(new DataHandler(fds));
-	         messageBodyPart.setHeader("Content-ID", "<image>");
+	      
 
 	         // add image to the multipart
 	         multipart.addBodyPart(messageBodyPart);
@@ -133,7 +135,6 @@ public class GerantServiceImpl implements IGerantService{
 			PdfPCell c1 = new PdfPCell(new Phrase("Id du produit"));
 			c1.setBackgroundColor(BaseColor.LIGHT_GRAY);
 			table.addCell(c1);
-
 			PdfPCell c2 = new PdfPCell(new Phrase("designation"));
 			c2.setBackgroundColor(BaseColor.LIGHT_GRAY);
 			table.addCell(c2);
@@ -153,26 +154,30 @@ public class GerantServiceImpl implements IGerantService{
 			table.setHeaderRows(1);
 			
 			doc.add(table);
-			
-			
-			
+		
 			List<Produit> liste=proService.getAllProduit();
 			for(Produit pro:liste) {
-				table.addCell(String.valueOf(pro));
+				table.addCell(Integer.toString(pro.getId()));
+				table.addCell(pro.getDesignation());
+				table.addCell(pro.getDescription());
+				try {
+					Image img=Image.getInstance(pro.getPhoto());
+					table.addCell(img);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				table.addCell(Double.toString(pro.getPrix()));
+				table.addCell(Integer.toString(pro.getQuantite()));			
 			}
-	
-	
-			
-		
 	        
 			doc.add(table);
 			doc.add(new Paragraph(" "));
 			doc.add(new Paragraph(" "));
 			doc.add(new Paragraph(" "));
 			doc.add(new Paragraph(" "));
-			
-			
-			
+		
 			doc.close();
 			
 			
